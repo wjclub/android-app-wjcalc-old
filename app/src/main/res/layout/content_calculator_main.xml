@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="tk.wjclub.wjcalc.CalculatorMain"
+    tools:showIn="@layout/app_bar_calculator_main">
+
+    <SeekBar
+        android:id="@+id/bitrate_seeker"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:max="3"
+        android:progress="3"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toStartOf="@+id/bitrate_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/output_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/encoding_switcher"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/output_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_marginTop="0dp"
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </ScrollView>
+
+    <RadioGroup
+        android:id="@+id/encoding_switcher"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/bitrate_seeker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/encoding_hex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:singleLine="true"
+            android:text="HEX" />
+
+        <RadioButton
+            android:id="@+id/encoding_dec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:duplicateParentState="false"
+            android:singleLine="true"
+            android:text="DEC" />
+
+        <RadioButton
+            android:id="@+id/encoding_oct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="OCT" />
+
+        <RadioButton
+            android:id="@+id/encoding_bin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="BIN" />
+    </RadioGroup>
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:weightSum="6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ToggleButton
+                android:id="@+id/tglbtn_calc_shift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ToggleButton"
+                android:textOff="⌥"
+                android:textOn="⌥"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_mod"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="%"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_or"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="∨"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_xor"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="⊻"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_not"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="¬"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_and"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="∧"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_calc_lsh"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="&lt;&lt;"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_rsh"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="&gt;&gt;"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_ce"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="CE"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_c"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="c"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_del"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="⌫"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_div"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="÷"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_calc_input_a"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="A"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_b"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="B"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_7"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="7"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_8"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="8"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_9"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="9"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_mul"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="×"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_calc_input_c"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="C"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_d"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="D"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_4"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="4"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_5"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="5"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_6"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="6"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_sub"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="-"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_calc_input_e"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="E"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_f"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="F"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_1"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="1"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="2"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_3"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="3"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_add"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="+"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_calc_input_o_parenth"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="("
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_input_c_parenth"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text=")"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_input_pm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="±"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_calc_input_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="0"
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_input_point"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="."
+                android:textSize="18sp"
+                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+
+            <Button
+                android:id="@+id/btn_calc_exec"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onKeypadClick"
+                android:text="="
+                android:textSize="18sp" />
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/bitrate_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="monospace"
+        android:text="64 bit"
+        app:layout_constraintBottom_toBottomOf="@+id/bitrate_seeker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bitrate_seeker" />
+
+</android.support.constraint.ConstraintLayout>

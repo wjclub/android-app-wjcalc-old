@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/main_stuff"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_normal"
+            android:icon="@drawable/ic_looks_one_black_24dp"
+            android:title="Generic" />
+        <item
+            android:id="@+id/nav_science"
+            android:icon="@drawable/ic_functions_black_24dp"
+            android:title="Scientific" />
+        <item
+            android:id="@+id/nav_programming"
+            android:checked="true"
+            android:icon="@drawable/ic_code_black_24dp"
+            android:title="Programming" />
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Tools" />
+    </group>
+
+    <group
+        android:id="@+id/other_stuff"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_outline_black_24dp"
+            android:title="About" />
+    </group>
+</menu>
