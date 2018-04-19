@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,8 +29,7 @@ import org.joou.ULong;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 
-public class CalculatorMain extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class CalculatorMain extends Fragment {
     private ViewGroup mainView;
     private TextView outputText;
     public enum bitrates {EIGHT,SIXTEEN,THIRTYTWO,SIXTYFOUR;
@@ -112,12 +112,11 @@ public class CalculatorMain extends AppCompatActivity
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calculator_main);
-        mainView = (ViewGroup) findViewById(R.id.content_constraint_layout);
+        mainView = (ViewGroup) getView().findViewById(R.id.content_constraint_layout);
         currentEncoding = encodings.DEC;
-        encodingSwitcher = findViewById(R.id.encoding_switcher);
+        encodingSwitcher = getView().findViewById(R.id.encoding_switcher);
         encodingSwitcher.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -139,18 +138,17 @@ public class CalculatorMain extends AppCompatActivity
                 updateNumbers();
             }
         });
-        encodingOct = findViewById(R.id.encoding_oct);
-        encodingDec = findViewById(R.id.encoding_dec);
-        encodingBin = findViewById(R.id.encoding_bin);
-        encodingHex = findViewById(R.id.encoding_hex);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        encodingOct = getView().findViewById(R.id.encoding_oct);
+        encodingDec = getView().findViewById(R.id.encoding_dec);
+        encodingBin = getView().findViewById(R.id.encoding_bin);
+        encodingHex = getView().findViewById(R.id.encoding_hex);
+        Toolbar toolbar = (Toolbar) getView().findViewById(R.id.toolbar);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_clear:
-                        onKeypadClick(findViewById(R.id.btn_calc_ce));
+                        onKeypadClick(getView().findViewById(R.id.btn_calc_ce));
                         return true;
                     case R.id.action_settings:
                         return true;
@@ -158,8 +156,8 @@ public class CalculatorMain extends AppCompatActivity
                 return false;
             }
         });
-        bitrateText = findViewById(R.id.bitrate_text);
-        bitrateSeekBar = findViewById(R.id.bitrate_seeker);
+        bitrateText = getView().findViewById(R.id.bitrate_text);
+        bitrateSeekBar = getView().findViewById(R.id.bitrate_seeker);
         bitrateSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
@@ -179,7 +177,7 @@ public class CalculatorMain extends AppCompatActivity
 
             }
         });
-        outputText = findViewById(R.id.output_text);
+        outputText = getView().findViewById(R.id.output_text);
         int[] numpadButtonIDs = {
                 R.id.btn_calc_input_0,
                 R.id.btn_calc_input_1,
@@ -199,16 +197,14 @@ public class CalculatorMain extends AppCompatActivity
                 R.id.btn_calc_input_f,
         };
         for (int i = 0; i < 16; i++) {
-            numpadButtons[i] = (Button) findViewById(numpadButtonIDs[i]);
+            numpadButtons[i] = (Button) getView().findViewById(numpadButtonIDs[i]);
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) getView().findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        onKeypadClick(findViewById(R.id.btn_calc_ce));
+        onKeypadClick(getView().findViewById(R.id.btn_calc_ce));
     }
 
     private void makeNewNumberConform(long newNumber) {
@@ -229,23 +225,6 @@ public class CalculatorMain extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.calculator_main, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -258,30 +237,6 @@ public class CalculatorMain extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_normal) {
-
-        } else if (id == R.id.nav_science) {
-
-        } else if (id == R.id.nav_programming) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_about) {
-            Intent i = new Intent(CalculatorMain.this, AboutActivity.class);
-            startActivity(i);
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void onKeypadClick(View v) {
